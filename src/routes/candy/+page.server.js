@@ -1,4 +1,4 @@
-import { candies } from "../../db/candies";
+import { candies } from "../../lib/db/candies";
 
 export const load = async () => {
   const data = await candies.find({}).sort({ _id: -1 }).toArray();

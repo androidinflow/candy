@@ -8,6 +8,13 @@
   import { afterNavigate } from "$app/navigation";
   import { Separator } from "$lib/components/ui/separator";
 
+  // Modules
+  import { user } from "$lib/stores/user.store.js";
+
+  export let data;
+
+  $: $user = data.user;
+
   $: pageTitle = $page.url.pathname === "/" ? "Home" : "Red Candy";
   let isSheetOpen = false;
 
@@ -54,14 +61,28 @@
   </div>
 
   <div class="flex items-center space-x-4">
-    <Button
-      variant="outline"
-      class="hidden md:inline-flex items-center gap-2"
-      href="/account/login"
-    >
-      <LogIn size={18} />
-      Login
-    </Button>
+    {#if $user}
+      <form action="/account/logout" method="POST">
+        <li>
+          <Button
+            type="submit"
+            variant="outline"
+            class="hidden md:inline-flex items-center gap-2"
+          >
+            Logout
+          </Button>
+        </li>
+      </form>
+    {:else}
+      <Button
+        variant="outline"
+        class="hidden md:inline-flex items-center gap-2"
+        href="/account/login"
+      >
+        <LogIn size={18} />
+        Login
+      </Button>
+    {/if}
     <ThemeToggle />
   </div>
 </nav>

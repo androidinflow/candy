@@ -1,6 +1,7 @@
 <script>
   import { Button } from "$lib/components/ui/button";
   import { Input } from "$lib/components/ui/input";
+  import { user } from "$lib/stores/user.store";
   import {
     Tabs,
     TabsList,
@@ -19,6 +20,11 @@
     >
       AI-Powered UI Generation
     </h1>
+
+    {#if $user}
+      {$user.id}
+    {/if}
+
     <p class="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
       Transform your ideas into stunning UI designs with the power of AI and
       shadcn/ui components.
